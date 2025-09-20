@@ -1,46 +1,72 @@
 #include <stdio.h>
 
-int main(){
+// Função recursiva para movimentação da Torre
+void moverTorre(int casa, int limite)
+{
+    if (casa > limite)
+        return;
+    printf("Casa %d: Direita\n", casa);
+    moverTorre(casa + 1, limite);
+}
 
-    printf(" ***Jogo de Xadrez*** \n"); // Título do Jogo.
+// Função recursiva para movimentação da Rainha
+void moverRainha(int casa, int limite)
+{
+    if (casa > limite)
+        return;
+    printf("Casa %d: Esquerda\n", casa);
+    moverRainha(casa + 1, limite);
+}
 
-    printf("Movimentação da Torre\n"); // Qual peça irá de mover, torre: 5 casas à direita.
-    for(int t = 0; t <= 5; t++) // inicialização, condição e incremento.
+// Função recursiva com loops aninhados para o Bispo
+void moverBispo(int linha, int maxLinha, int maxColuna)
+{
+    if (linha > maxLinha)
+        return;
+    for (int coluna = 1; coluna <= maxColuna; coluna++)
     {
-        printf("Casa %d: à direita\n", t); // Saída.
+        printf("Casa [%d,%d]: Cima à Direita\n", linha, coluna);
     }
-    
+    moverBispo(linha + 1, maxLinha, maxColuna);
+}
+
+// Função com loops complexos para o Cavalo
+void moverCavalo(int maxLinha, int maxColuna)
+{
+    for (int linha = 2; linha <= maxLinha; linha++)
+    {
+        for (int coluna = 1; coluna <= maxColuna; coluna++)
+        {
+            if (linha % 2 == 0 && coluna % 2 != 0)
+            {
+                printf("Movimentação: %d para cima e %d para direita\n", linha, coluna);
+                continue;
+            }
+            if (linha + coluna > maxLinha + maxColuna)
+                break;
+        }
+    }
+}
+
+int main()
+{
+    printf(" ***Jogo de Xadrez - Nível Mestre*** \n\n");
+
+    printf("Movimentação da Torre\n");
+    moverTorre(1, 5);
+    printf("\n");
+
     printf("Movimentação do Bispo\n");
-    int b = 0; // variável inteira "b", representando o "Bispo".
-    while (b <= 5) //Condição da Estrura.
-    {
-        printf("Casa %d: cima à direita\n", b); // Saída.
-        b++; // Incremento.
-    }
+    moverBispo(1, 5, 5);
+    printf("\n");
 
     printf("Movimentação da Rainha\n");
-    int r = 0; // Variável inteira "r", representando a "Rainha".
-    do
-    {
-        printf("Casa %d: Oito casas à esquerda\n", r);// Saída.
-        r++; // Incremento.
-    } while (r <= 8);// Condição.
-    
+    moverRainha(1, 8);
+    printf("\n");
+
     printf("Movimentação do Cavalo\n");
-    for(int linha = 2; linha <=2; linha++){
-        int coluna = 1;
-        while (coluna <= 1)
-        {
-            printf("Movimentação: %d para baixo e %d para esquerda", linha, coluna);
-            coluna++;
-        }
-        printf("\n");
-    }
-    
-
-    
-
-
+    moverCavalo(4, 4);
+    printf("\n");
 
     return 0;
 }
