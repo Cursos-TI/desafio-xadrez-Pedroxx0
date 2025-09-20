@@ -26,6 +26,17 @@ int main(){
         r++; // Incremento.
     } while (r <= 8);// Condição.
     
+    printf("Movimentação do Cavalo\n");
+    for(int linha = 2; linha <=2; linha++){
+        int coluna = 1;
+        while (coluna <= 1)
+        {
+            printf("Movimentação: %d para baixo e %d para esquerda", linha, coluna);
+            coluna++;
+        }
+        printf("\n");
+    }
+    
 
     
 
